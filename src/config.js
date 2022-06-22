@@ -9,7 +9,7 @@ let mongoConfig = {
   connection: `mongodb://${env.MONGO_HOSTNAME}`,
   db_name: env.MONGO_DB_NAME,
   options: {
-    auto_reconnect: true,
+    // auto_reconnect: true,
     useUnifiedTopology: true,
     useNewUrlParser: true,
   },
@@ -102,6 +102,10 @@ let fhirServerConfig = {
       service: './src/services/patient/patient.service.js',
       versions: [VERSIONS['4_0_0']],
     },
+    Location: {
+      service: './src/services/location/location.service.js',
+      versions: [VERSIONS['4_0_0']],
+    }
   },
 };
 
