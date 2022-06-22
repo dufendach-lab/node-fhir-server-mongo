@@ -445,3 +445,74 @@ module.exports.historyById = (args, context) =>
       });
     });
   });
+
+  module.exports.patch = (args, context) =>
+  new Promise((resolve, reject) => {
+    logger.info('Location >>> patch'); // Should this say update (instead of patch) because the end result is that of an update, not a patch
+
+    let { base_version, id, patchContent } = args;
+
+    // Grab an instance of our DB and collection
+    let db = globals.get(CLIENT_DB);
+    let collection = db.collection(`${COLLECTION.LOCATION}_${base_version}`);
+
+    // Get current record
+    // Query our collection for this observation
+    collection.findOne({ id: id.toString() }, (err, data) => {
+      if (err) {
+        logger.error('Error with Location.searchById: ', err);
+        return reject(err);
+      }
+
+      // Validate the patch
+      let errors = jsonpatch.validate(patchContent, data);
+      if (errors && Object.keys(errors).length > 0) {
+        logger.error('Error with patch contents');
+        return reject(errors);
+      }
+      // Make the changes indicated in the patch
+      let resource = jsonpatch.applyPatch(data, patchContent).newDocument;
+
+      let Location = getLocation(base_version);
+      let location = new Location(resource);
+
+      if (data && data.meta) {
+        let foundLocation = new Location(data);
+        let meta = foundLocation.meta;
+        meta.versionId = `${parseInt(foundLocation.meta.versionId) + 1}`;
+        location.meta = meta;
+      } else {
+        return reject('Unable to patch resource. Missing either data or metadata.');
+      }
+
+      // Same as update from this point on
+      let cleaned = JSON.parse(JSON.stringify(location));
+      let doc = Object.assign(cleaned, { _id: id });
+
+      // Insert/update our location record
+      collection.findOneAndUpdate({ id: id }, { $set: doc }, { upsert: true }, (err2, res) => {
+        if (err2) {
+          logger.error('Error with Location.update: ', err2);
+          return reject(err2);
+        }
+
+        // Save to history
+        let history_collection = db.collection(`${COLLECTION.LOCATION}_${base_version}_History`);
+        let history_location = Object.assign(cleaned, { _id: id + cleaned.meta.versionId });
+
+        // Insert our location record to history but don't assign _id
+        return history_collection.insertOne(history_location, (err3) => {
+          if (err3) {
+            logger.error('Error with LocationHistory.create: ', err3);
+            return reject(err3);
+          }
+
+          return resolve({
+            id: doc.id,
+            created: res.lastErrorObject && !res.lastErrorObject.updatedExisting,
+            resource_version: doc.meta.versionId,
+          });
+        });
+      });
+    });
+  });
