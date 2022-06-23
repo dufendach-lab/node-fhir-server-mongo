@@ -432,23 +432,22 @@ module.exports.search = (args) =>
     let db = globals.get(CLIENT_DB);
     let collection = db.collection(`${COLLECTION.PATIENT}_${base_version}`);
     let Patient = getPatient(base_version);
-
-    // Query our collection for this observation
-    collection.find(query, (err, data) => {
-      if (err) {
-        logger.error('Error with Patient.search: ', err);
-        return reject(err);
-      }
-
-      // Patient is a patient cursor, pull documents out before resolving
-      data.toArray().then((patients) => {
+    
+    // Query our collection for this observation // TODO: Be sure this strategy is used by other services implemented
+    collection.find(query).toArray().then(
+      (patients) => {
         patients.forEach(function (element, i, returnArray) {
           returnArray[i] = new Patient(element);
         });
         resolve(patients);
-      });
-    });
+      },
+      err => {
+        logger.error('Error with Patient.search: ', err);
+        return reject(err);
+      }
+    )
   });
+  // };
 
 module.exports.searchById = (args) =>
   new Promise((resolve, reject) => {
@@ -533,9 +532,7 @@ module.exports.update = (args, { req }) =>
   new Promise((resolve, reject) => {
     logger.info('Patient >>> update');
 
-    let resource = req.body;
-
-    let { base_version, id } = args;
+    let { base_version, id, resource } = args;
 
     // Grab an instance of our DB and collection
     let db = globals.get(CLIENT_DB);

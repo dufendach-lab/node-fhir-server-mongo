@@ -94,16 +94,20 @@ let fhirServerConfig = {
       service: './src/services/organization/organization.service.js',
       versions: [VERSIONS['4_0_0']],
     },
-    Condition: {
-      service: './src/services/condition/condition.service.js',
-      versions: [VERSIONS['4_0_0']],
-    },
     Patient: {
       service: './src/services/patient/patient.service.js',
       versions: [VERSIONS['4_0_0']],
     },
     Location: {
       service: './src/services/location/location.service.js',
+      versions: [VERSIONS['4_0_0']],
+    },
+    List: {
+      service: './src/services/list/list.service.js',
+      versions: [VERSIONS['4_0_0']]
+    },
+    Condition: {
+      service: './src/services/condition/condition.service.js',
       versions: [VERSIONS['4_0_0']],
     }
   },

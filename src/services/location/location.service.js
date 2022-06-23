@@ -62,6 +62,13 @@ let buildStu3SearchQuery = (args) => {
       query.id = _id;
     }
 
+    if (partof) {
+      let queryBuilder = referenceQueryBuilder(partof, 'partOf.reference');
+      for (let i in queryBuilder) {
+        query[i] = queryBuilder[i];
+      }
+    }
+
     return query;
 };
 
@@ -98,6 +105,13 @@ let buildStu2SearchQuery = (args) => {
     query.id = _id;
   }
 
+  if (partof) {
+    let queryBuilder = referenceQueryBuilder(partof, 'partOf.reference');
+    for (let i in queryBuilder) {
+      query[i] = queryBuilder[i];
+    }
+  }
+
   return query;
 };
 /**
@@ -130,22 +144,21 @@ module.exports.search = (args) =>
     let collection = db.collection(`${COLLECTION.LOCATION}_${base_version}`);
     let Location = getLocation(base_version);
 
-    // Query our collection for this observation
-    collection.find(query, (err, data) => {
-      if (err) {
-        logger.error('Error with Location.search: ', err);
-        return reject(err);
-      }
-
-      // Location is a location cursor, pull documents out before resolving
-      data.toArray().then((locations) => {
+    // Query our collection for this observation // TODO: Be sure this strategy is used by other services implemented
+    collection.find(query).toArray().then(
+      (locations) => {
         locations.forEach(function (element, i, returnArray) {
           returnArray[i] = new Location(element);
         });
         resolve(locations);
-      });
-    });
+      },
+      err => {
+        logger.error('Error with Location.search: ', err);
+        return reject(err);
+      }
+    )
   });
+  // };
 
 module.exports.searchById = (args) =>
   new Promise((resolve, reject) => {
@@ -179,7 +192,7 @@ module.exports.create = (args, { req }) =>
     let { base_version } = args;
 
     let db = globals.get(CLIENT_DB);
-    let collection = db.collection(`${COLLECTION.PATIENT}_${base_version}`);
+    let collection = db.collection(`${COLLECTION.LOCATION}_${base_version}`);
 
     // Make sure to use this ID when inserting this resource
     let Location = getLocation(base_version);
@@ -196,7 +209,7 @@ module.exports.create = (args, { req }) =>
       lastUpdated: moment.utc().format('YYYY-MM-DDTHH:mm:ssZ'),
     });
     // TODO: save record to database
-    let doc = JSON.parse(JSON.stringify(patient.toJSON()));
+    let doc = JSON.parse(JSON.stringify(location.toJSON()));
     Object.assign(doc, { id: id });
 
     let history_doc = Object.assign({}, doc);
