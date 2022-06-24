@@ -244,7 +244,9 @@ module.exports.update = (args, { req }) =>
   new Promise((resolve, reject) => {
     logger.info('Condition >>> update');
 
-    let { base_version, id, resource } = args;
+    let resource = req.body;
+
+    let { base_version, id } = args;
 
     // Cast resource to Condition Class
 

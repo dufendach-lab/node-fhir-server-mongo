@@ -104,12 +104,16 @@ let fhirServerConfig = {
     },
     List: {
       service: './src/services/list/list.service.js',
-      versions: [VERSIONS['4_0_0']]
+      versions: [VERSIONS['4_0_0']],
     },
     Condition: {
       service: './src/services/condition/condition.service.js',
       versions: [VERSIONS['4_0_0']],
-    }
+    },
+    Encounter: {
+      service: './src/services/encounter/encounter.service.js',
+      versions: [VERSIONS['4_0_0']],
+    },
   },
 };
 

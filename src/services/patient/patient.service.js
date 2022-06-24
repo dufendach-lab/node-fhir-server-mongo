@@ -532,7 +532,9 @@ module.exports.update = (args, { req }) =>
   new Promise((resolve, reject) => {
     logger.info('Patient >>> update');
 
-    let { base_version, id, resource } = args;
+    let resource = req.body;
+
+    let { base_version, id } = args;
 
     // Grab an instance of our DB and collection
     let db = globals.get(CLIENT_DB);

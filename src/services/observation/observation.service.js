@@ -5,6 +5,12 @@ const { resolveSchema } = require('@asymmetrik/node-fhir-server-core');
 const FHIRServer = require('@asymmetrik/node-fhir-server-core');
 const { ObjectID } = require('mongodb');
 const logger = require('@asymmetrik/node-fhir-server-core').loggers.get();
+const { COLLECTION, CLIENT_DB } = require('../../constants');
+const moment = require('moment-timezone');
+const globals = require('../../globals');
+const jsonpatch = require('fast-json-patch');
+
+const { getUuid } = require('../../utils/uid.util');
 
 let getObservation = (base_version) => {
   return resolveSchema(base_version, 'Observation');
