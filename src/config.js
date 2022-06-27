@@ -114,6 +114,14 @@ let fhirServerConfig = {
       service: './src/services/encounter/encounter.service.js',
       versions: [VERSIONS['4_0_0']],
     },
+    Observation: {
+      service: './src/services/observation/observation.service.js',
+      versions: [VERSIONS['4_0_0']],
+    },
+    CarePlan: {
+      service: './src/services/careplan/careplan.service.js',
+      versions: [VERSIONS['4_0_0']],
+    }
   },
 };
 
