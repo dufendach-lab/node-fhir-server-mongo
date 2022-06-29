@@ -70,6 +70,34 @@ let buildStu3SearchQuery = (args) => {
       query.id = _id;
     }
 
+    if (subject) {
+      let queryBuilder = referenceQueryBuilder(subject, 'subject.reference');
+      for (let i in queryBuilder) {
+        query[i] = queryBuilder[i];
+      }
+    }
+
+    if (encounter) {
+      let queryBuilder = referenceQueryBuilder(encounter, 'encounter.reference');
+      for (let i in queryBuilder) {
+        query[i] = queryBuilder[i];
+      }
+    }
+
+    if (asserter) {
+      let queryBuilder = referenceQueryBuilder(asserter, 'asserter.reference');
+      for (let i in queryBuilder) {
+        query[i] = queryBuilder[i];
+      }
+    }
+
+    if (evidence_detail) {
+      let queryBuilder = referenceQueryBuilder(evidence_detail, 'evidence.detail.reference');
+      for (let i in queryBuilder) {
+        query[i] = queryBuilder[i];
+      }
+    }
+
     return query;
 }
 
@@ -111,6 +139,34 @@ let buildStu2SearchQuery = (args) => {
 
   if (_id) {
     query.id = _id;
+  }
+
+  if (subject) {
+    let queryBuilder = referenceQueryBuilder(subject, 'subject.reference');
+    for (let i in queryBuilder) {
+      query[i] = queryBuilder[i];
+    }
+  }
+
+  if (encounter) {
+    let queryBuilder = referenceQueryBuilder(encounter, 'encounter.reference');
+    for (let i in queryBuilder) {
+      query[i] = queryBuilder[i];
+    }
+  }
+
+  if (asserter) {
+    let queryBuilder = referenceQueryBuilder(asserter, 'asserter.reference');
+    for (let i in queryBuilder) {
+      query[i] = queryBuilder[i];
+    }
+  }
+
+  if (evidence_detail) {
+    let queryBuilder = referenceQueryBuilder(evidence_detail, 'evidence.detail.reference');
+    for (let i in queryBuilder) {
+      query[i] = queryBuilder[i];
+    }
   }
 
   return query;
