@@ -74,6 +74,14 @@ let buildStu3SearchQuery = (args) => {
     }
   }
 
+  if (status) {
+    query['location.status'] = status;
+  }
+
+  if (location_period) {
+    query['location.period'] = dateQueryBuilder(location_period, 'period', '');
+  }
+
   return query;
 };
 
@@ -121,6 +129,15 @@ let buildDstu2SearchQuery = (args) => {
       query[i] = queryBuilder[i];
     }
   }
+
+  if (status) {
+    query['location.status'] = status;
+  }
+
+  if (location_period) {
+    query['location.period'] = location_period;
+  }
+
   return query;
 };
 
