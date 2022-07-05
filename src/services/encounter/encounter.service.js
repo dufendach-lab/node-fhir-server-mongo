@@ -78,8 +78,11 @@ let buildStu3SearchQuery = (args) => {
     query['location.status'] = status;
   }
 
-  if (location_period) {
-    query['location.period'] = dateQueryBuilder(location_period, 'period', '');
+  if (subject) {
+    let queryBuilder = referenceQueryBuilder(subject, 'subject.reference');
+    for (let i in queryBuilder) {
+      query[i] = queryBuilder[i];
+    }
   }
 
   return query;
@@ -134,6 +137,13 @@ let buildDstu2SearchQuery = (args) => {
     query['location.status'] = status;
   }
 
+  if (subject) {
+    let queryBuilder = referenceQueryBuilder(subject, 'subject.reference');
+    for (let i in queryBuilder) {
+      query[i] = queryBuilder[i];
+    }
+  }
+  
   return query;
 };
 

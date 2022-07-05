@@ -71,6 +71,7 @@ let buildStu3SearchQuery = (args) => {
     let related_type = args['related-type'];
     let specimen = args['specimen'];
     let status = args['status'];
+    let subject = args['subject'];
     let reference = args['reference'];
     let value_concept = args['value-concept'];
     let value_date = args['value-date'];
@@ -100,6 +101,13 @@ let buildStu3SearchQuery = (args) => {
 
     if (performer) {
       let queryBuilder = referenceQueryBuilder(performer, 'performer.reference');
+      for (let i in queryBuilder) {
+        query[i] = queryBuilder[i];
+      }
+    }
+
+    if (subject) {
+      let queryBuilder = referenceQueryBuilder(subject, 'subject.reference');
       for (let i in queryBuilder) {
         query[i] = queryBuilder[i];
       }
@@ -150,6 +158,7 @@ let buildStu3SearchQuery = (args) => {
     let related_type = args['related-type'];
     let specimen = args['specimen'];
     let status = args['status'];
+    let subject = args['subject'];
     let reference = args['reference'];
     let value_concept = args['value-concept'];
     let value_date = args['value-date'];
@@ -179,6 +188,13 @@ let buildStu3SearchQuery = (args) => {
 
     if (performer) {
       let queryBuilder = referenceQueryBuilder(performer, 'performer.reference');
+      for (let i in queryBuilder) {
+        query[i] = queryBuilder[i];
+      }
+    }
+
+    if (subject) {
+      let queryBuilder = referenceQueryBuilder(subject, 'subject.reference');
       for (let i in queryBuilder) {
         query[i] = queryBuilder[i];
       }

@@ -59,6 +59,13 @@ if (_id) {
   query.id = _id;
 }
 
+if (subject) {
+  let queryBuilder = referenceQueryBuilder(subject, 'subject.reference');
+  for (let i in queryBuilder) {
+    query[i] = queryBuilder[i];
+  }
+}
+
 return query;
 };
 
@@ -89,6 +96,13 @@ let ors = [];
 
 if (_id) {
   query.id = _id;
+}
+
+if (subject) {
+  let queryBuilder = referenceQueryBuilder(subject, 'subject.reference');
+  for (let i in queryBuilder) {
+    query[i] = queryBuilder[i];
+  }
 }
 
 return query;
