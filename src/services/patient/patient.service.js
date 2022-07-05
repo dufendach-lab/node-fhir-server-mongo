@@ -47,7 +47,7 @@ let buildStu3SearchQuery = (args) => {
   let animal_breed = args['animal-breed'];
   let animal_species = args['animal-species'];
   let birthdate = args['birthdate'];
-  let death_date = args['death-date'];
+  let death_date = args['deathdate'];
   let deceased = args['deceased'];
   let email = args['email'];
   let family = args['family'];
@@ -212,7 +212,7 @@ let buildStu3SearchQuery = (args) => {
       query[i] = queryBuilder[i];
     }
   }
-
+  console.log(query.deceasedDateTime);
   return query;
 };
 

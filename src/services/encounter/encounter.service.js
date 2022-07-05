@@ -134,10 +134,6 @@ let buildDstu2SearchQuery = (args) => {
     query['location.status'] = status;
   }
 
-  if (location_period) {
-    query['location.period'] = location_period;
-  }
-
   return query;
 };
 

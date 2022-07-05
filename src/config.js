@@ -121,6 +121,10 @@ let fhirServerConfig = {
     CarePlan: {
       service: './src/services/careplan/careplan.service.js',
       versions: [VERSIONS['4_0_0']],
+    },
+    Procedure: {
+      service: './src/services/procedure/procedure.service.js',
+      versions: [VERSIONS['4_0_0']],
     }
   },
 };
