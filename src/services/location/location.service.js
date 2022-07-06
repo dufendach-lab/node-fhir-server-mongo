@@ -73,6 +73,13 @@ let buildStu3SearchQuery = (args) => {
       }
     }
 
+    if (type) {
+      let queryBuilder = tokenQueryBuilder(type, 'code', 'physicalType.coding', '');
+      for (let i in queryBuilder) {
+        query[i] = queryBuilder[i];
+      }
+    }
+
     return query;
 };
 
@@ -112,9 +119,16 @@ let buildStu2SearchQuery = (args) => {
   if (name) {
     query.name = stringQueryBuilder(name);
   }
-  
+
   if (partof) {
     let queryBuilder = referenceQueryBuilder(partof, 'partOf.reference');
+    for (let i in queryBuilder) {
+      query[i] = queryBuilder[i];
+    }
+  }
+
+  if (type) {
+    let queryBuilder = tokenQueryBuilder(type, 'code', 'physicalType.coding', '');
     for (let i in queryBuilder) {
       query[i] = queryBuilder[i];
     }

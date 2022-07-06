@@ -212,7 +212,7 @@ let buildStu3SearchQuery = (args) => {
       query[i] = queryBuilder[i];
     }
   }
-  console.log(query.deceasedDateTime);
+
   return query;
 };
 
