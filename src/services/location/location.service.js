@@ -62,6 +62,10 @@ let buildStu3SearchQuery = (args) => {
       query.id = _id;
     }
 
+    if (name) {
+      query.name = stringQueryBuilder(name);
+    }
+    
     if (partof) {
       let queryBuilder = referenceQueryBuilder(partof, 'partOf.reference');
       for (let i in queryBuilder) {
@@ -105,6 +109,10 @@ let buildStu2SearchQuery = (args) => {
     query.id = _id;
   }
 
+  if (name) {
+    query.name = stringQueryBuilder(name);
+  }
+  
   if (partof) {
     let queryBuilder = referenceQueryBuilder(partof, 'partOf.reference');
     for (let i in queryBuilder) {
