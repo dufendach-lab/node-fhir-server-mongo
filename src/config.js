@@ -9,7 +9,7 @@ let mongoConfig = {
   connection: `mongodb://${env.MONGO_HOSTNAME}`,
   db_name: env.MONGO_DB_NAME,
   options: {
-    auto_reconnect: true,
+    // auto_reconnect: true,
     useUnifiedTopology: true,
     useNewUrlParser: true,
   },
@@ -94,14 +94,38 @@ let fhirServerConfig = {
       service: './src/services/organization/organization.service.js',
       versions: [VERSIONS['4_0_0']],
     },
-    Condition: {
-      service: './src/services/condition/condition.service.js',
-      versions: [VERSIONS['4_0_0']],
-    },
     Patient: {
       service: './src/services/patient/patient.service.js',
       versions: [VERSIONS['4_0_0']],
     },
+    Location: {
+      service: './src/services/location/location.service.js',
+      versions: [VERSIONS['4_0_0']],
+    },
+    List: {
+      service: './src/services/list/list.service.js',
+      versions: [VERSIONS['4_0_0']],
+    },
+    Condition: {
+      service: './src/services/condition/condition.service.js',
+      versions: [VERSIONS['4_0_0']],
+    },
+    Encounter: {
+      service: './src/services/encounter/encounter.service.js',
+      versions: [VERSIONS['4_0_0']],
+    },
+    Observation: {
+      service: './src/services/observation/observation.service.js',
+      versions: [VERSIONS['4_0_0']],
+    },
+    CarePlan: {
+      service: './src/services/careplan/careplan.service.js',
+      versions: [VERSIONS['4_0_0']],
+    },
+    Procedure: {
+      service: './src/services/procedure/procedure.service.js',
+      versions: [VERSIONS['4_0_0']],
+    }
   },
 };
 

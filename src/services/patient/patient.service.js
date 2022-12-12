@@ -47,7 +47,7 @@ let buildStu3SearchQuery = (args) => {
   let animal_breed = args['animal-breed'];
   let animal_species = args['animal-species'];
   let birthdate = args['birthdate'];
-  let death_date = args['death-date'];
+  let death_date = args['deathdate'];
   let deceased = args['deceased'];
   let email = args['email'];
   let family = args['family'];
@@ -432,23 +432,22 @@ module.exports.search = (args) =>
     let db = globals.get(CLIENT_DB);
     let collection = db.collection(`${COLLECTION.PATIENT}_${base_version}`);
     let Patient = getPatient(base_version);
-
-    // Query our collection for this observation
-    collection.find(query, (err, data) => {
-      if (err) {
-        logger.error('Error with Patient.search: ', err);
-        return reject(err);
-      }
-
-      // Patient is a patient cursor, pull documents out before resolving
-      data.toArray().then((patients) => {
+    
+    // Query our collection for this observation // TODO: Be sure this strategy is used by other services implemented
+    collection.find(query).toArray().then(
+      (patients) => {
         patients.forEach(function (element, i, returnArray) {
           returnArray[i] = new Patient(element);
         });
         resolve(patients);
-      });
-    });
+      },
+      err => {
+        logger.error('Error with Patient.search: ', err);
+        return reject(err);
+      }
+    )
   });
+  // };
 
 module.exports.searchById = (args) =>
   new Promise((resolve, reject) => {
