@@ -3583,15 +3583,20 @@ smart-buffer@^4.2.0:
   resolved "https://registry.yarnpkg.com/smart-buffer/-/smart-buffer-4.2.0.tgz#6e1d71fa4f18c05f7d0ff216dd16a481d0e8d9ae"
   integrity sha512-94hK0Hh8rPqQl2xXc3HsaBoOXKV20MToPkcXvwbISWLEs+64sBq5kFgn2kJDHb1Pry9yrP0dxrCI9RRci7RXKg==
 
-snyk@^1.746.0, snyk@^1.833.0:
-  version "1.963.0"
-  resolved "https://registry.yarnpkg.com/snyk/-/snyk-1.963.0.tgz#aa99ae77c0b51fd14aa63a9b25cf45fc5aa7e0b2"
-  integrity sha512-uPy7fTBeAEGWTb/gozUYFxBm0H1OaF0uBzodc6t5EJGy0cxzBB3m9DpEOtnZtFP+pji59+YwQlpUJyhpqoyh5g==
+snyk@^1.746.0:
+  version "1.833.0"
+  resolved "https://registry.yarnpkg.com/snyk/-/snyk-1.833.0.tgz#969004c43da4f3f26f7dfed8c6ff3b0e36294ea5"
+  integrity sha512-/wAFQIoJDOA17eCOyIZFAGw54dXrSFPLjbBbjV+yXwLBfJpgs8kbc3BuFH/JGoMB663YCYZzoorkymMDbuD6+A==
 
-socks@^2.6.2:
-  version "2.6.2"
-  resolved "https://registry.yarnpkg.com/socks/-/socks-2.6.2.tgz#ec042d7960073d40d94268ff3bb727dc685f111a"
-  integrity sha512-zDZhHhZRY9PxRruRMR7kMhnf3I8hDs4S3f9RecfnGxvcBHQcKcIH/oUcEWffsfl1XxdYlA7nnlGbbTvPz9D8gA==
+snyk@^1.996.0:
+  version "1.1024.0"
+  resolved "https://registry.yarnpkg.com/snyk/-/snyk-1.1024.0.tgz#f9ff2c8660da9cda34ea5807ee8731164b94ab0a"
+  integrity sha512-j0Hk/6kVV4pah3TwnhDCHEDnnIK+SkSYp6F/krz0Z+KfvG0fz3nORuufevjCV1ErIvcuZAnqQdRUVBPYTwfS6g==
+
+socks@^2.6.1:
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/socks/-/socks-2.6.1.tgz#989e6534a07cf337deb1b1c94aaa44296520d30e"
+  integrity sha512-kLQ9N5ucj8uIcxrDwjm0Jsqk06xdpBjGNQtpXy4Q8/QY2k+fY7nZH8CARy+hkbG+SGAovmzzuauCpBlb8FrnBA==
   dependencies:
     ip "^1.1.5"
     smart-buffer "^4.2.0"
